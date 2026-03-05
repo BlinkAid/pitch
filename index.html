@@ -373,78 +373,6 @@
             text-align: center; font-size: 0.82rem;
         }
 
-        /* ── Inline Upload Placeholders ── */
-        .img-slot {
-            background: var(--slate-100);
-            border: 2px dashed var(--slate-300);
-            border-radius: var(--radius);
-            padding: 24px;
-            text-align: center;
-            position: relative;
-            cursor: pointer;
-            transition: border-color 0.2s, background 0.2s;
-            overflow: hidden;
-        }
-        .img-slot:hover { border-color: var(--blue-light); background: #eef2ff; }
-        .img-slot .slot-label { font-size: 0.85rem; color: var(--slate-600); font-weight: 500; }
-        .img-slot .slot-icon { font-size: 1.6rem; display: block; margin-bottom: 6px; }
-        .img-slot .upload-btn {
-            display: inline-block; margin-top: 10px;
-            padding: 6px 18px; border-radius: 100px;
-            background: var(--blue); color: white;
-            font-size: 0.78rem; font-weight: 600;
-            border: none; cursor: pointer;
-            transition: background 0.15s, transform 0.15s;
-        }
-        .img-slot .upload-btn:hover { background: var(--indigo); transform: scale(1.04); }
-        .img-slot input[type="file"] {
-            position: absolute; inset: 0; opacity: 0; cursor: pointer; z-index: 2;
-        }
-        .img-slot img.slot-preview {
-            width: 100%; height: 100%; object-fit: cover;
-            position: absolute; inset: 0; z-index: 1;
-            display: none;
-        }
-        .img-slot.has-image .slot-label,
-        .img-slot.has-image .slot-icon,
-        .img-slot.has-image .upload-btn { display: none; }
-        .img-slot.has-image { border-style: solid; border-color: var(--emerald); padding: 0; }
-        .img-slot.has-image img.slot-preview { display: block; }
-        /* Re-upload overlay on hover */
-        .img-slot.has-image::after {
-            content: 'Click to replace';
-            position: absolute; inset: 0; z-index: 3;
-            background: rgba(0,0,0,0.5); color: white;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.82rem; font-weight: 600;
-            opacity: 0; transition: opacity 0.2s;
-        }
-        .img-slot.has-image:hover::after { opacity: 1; }
-        .upload-card h4 { font-size: 0.95rem; margin-bottom: 4px; }
-        .upload-card p { font-size: 0.82rem; color: var(--slate-600); margin-bottom: 14px; }
-        .upload-card .upload-zone {
-            border: 2px dashed var(--slate-200);
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: background 0.15s, border-color 0.15s;
-            position: relative;
-        }
-        .upload-card .upload-zone:hover { background: #fef9ee; border-color: var(--amber); }
-        .upload-card .upload-zone input[type="file"] {
-            position: absolute; inset: 0; opacity: 0; cursor: pointer;
-        }
-        .upload-card .upload-zone .upload-icon { font-size: 1.5rem; display: block; margin-bottom: 4px; }
-        .upload-card .upload-zone .upload-text { font-size: 0.8rem; color: var(--slate-600); }
-        .upload-card .preview-img {
-            max-width: 100%; max-height: 120px; border-radius: 6px;
-            margin-top: 10px; display: none;
-        }
-        .upload-card.has-file .upload-zone { border-color: var(--emerald); background: #f0fdf4; }
-        .upload-card .status { font-size: 0.75rem; margin-top: 8px; font-weight: 500; }
-        .upload-card .status.success { color: var(--emerald); }
-
         /* ── Responsive ── */
         @media (max-width: 900px) {
             .hero-grid { grid-template-columns: 1fr; }
@@ -516,12 +444,11 @@
                     </div>
                 </div>
             </div>
-            <div class="hero-visual fade-up img-slot" data-slot="hero" style="aspect-ratio: 4/3;">
-                <input type="file" accept="image/*">
-                <img class="slot-preview" alt="BlinkAid prototype">
-                <span class="slot-icon">&#128083;</span>
-                <span class="slot-label"><strong>Product Photo</strong><br>BlinkAid glasses prototype with nose-pad electrodes</span>
-                <button class="upload-btn" type="button">Upload Image</button>
+            <div class="hero-visual fade-up" style="aspect-ratio: 4/3;">
+                <div class="hero-visual-placeholder">
+                    <span class="icon">&#128083;</span>
+                    BlinkAid Glasses Prototype
+                </div>
             </div>
         </div>
     </div>
@@ -600,13 +527,11 @@
                 <p>Clinicians and patients receive continuous insights: medication response, seizure events, symptom trends.</p>
             </div>
         </div>
-        <!-- Hardware diagram upload -->
-        <div class="img-slot fade-up" data-slot="hardware" style="margin-top: 40px; max-width: 700px; margin-left: auto; margin-right: auto; padding: 36px;">
-            <input type="file" accept="image/*">
-            <img class="slot-preview" alt="Hardware diagram">
-            <span class="slot-icon">&#128295;</span>
-            <span class="slot-label"><strong>Hardware Diagram</strong><br>Exploded view showing electrode placement on nose pads, Intan chip, accelerometer</span>
-            <button class="upload-btn" type="button">Upload Diagram</button>
+        <!-- Hardware diagram placeholder -->
+        <div class="fade-up" style="margin-top: 40px; max-width: 700px; margin-left: auto; margin-right: auto; padding: 48px 36px; background: var(--slate-100); border-radius: var(--radius); border: 1px solid var(--slate-200); text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">&#128295;</div>
+            <div style="font-weight: 600; color: var(--slate-700); font-size: 0.95rem;">Hardware Architecture</div>
+            <div style="color: var(--slate-600); font-size: 0.82rem; margin-top: 4px;">8-channel Intan EMG chip &middot; Nose-pad electrodes &middot; 3-axis accelerometer &middot; BLE SoC</div>
         </div>
     </div>
 </section>
@@ -660,13 +585,11 @@
                     <div class="big">~50%</div>
                     <div class="desc">Of patients develop motor fluctuations within 5 years of L-dopa therapy</div>
                 </div>
-                <!-- Upload: Real EMG signal from BlinkAid -->
-                <div class="img-slot fade-up" data-slot="pd-emg" style="margin-bottom:20px; padding: 20px;">
-                    <input type="file" accept="image/*">
-                    <img class="slot-preview" alt="Real EMG signal">
-                    <span class="slot-icon">&#128200;</span>
-                    <span class="slot-label"><strong>Real EMG Recording</strong><br>BlinkAid blink event signal with annotations</span>
-                    <button class="upload-btn" type="button">Upload Signal</button>
+                <!-- EMG signal placeholder -->
+                <div class="fade-up" style="margin-bottom:20px; padding: 24px; background: var(--slate-100); border-radius: var(--radius); border: 1px solid var(--slate-200); text-align: center;">
+                    <div style="font-size: 1.8rem; margin-bottom: 4px;">&#128200;</div>
+                    <div style="font-weight: 600; color: var(--slate-700); font-size: 0.85rem;">Real-time Blink EMG</div>
+                    <div style="color: var(--slate-600); font-size: 0.78rem; margin-top: 2px;">Live signal from BlinkAid nose-pad electrodes</div>
                 </div>
                 <!-- Generated EMG chart: PD blink rate comparison -->
                 <div class="emg-chart-box fade-up">
@@ -736,13 +659,11 @@
                     <div class="big">1 in 1,000</div>
                     <div class="desc">Annual SUDEP (sudden death) risk. Monitoring reduces risk.</div>
                 </div>
-                <!-- Upload: Real seizure/eyelid EMG from data -->
-                <div class="img-slot fade-up" data-slot="ep-emg" style="margin-bottom:20px; padding: 20px;">
-                    <input type="file" accept="image/*">
-                    <img class="slot-preview" alt="Seizure EMG signal">
-                    <span class="slot-icon">&#9889;</span>
-                    <span class="slot-label"><strong>Seizure EMG Recording</strong><br>Real eyelid myoclonia or ictal blinking pattern</span>
-                    <button class="upload-btn" type="button">Upload Signal</button>
+                <!-- Seizure EMG placeholder -->
+                <div class="fade-up" style="margin-bottom:20px; padding: 24px; background: var(--slate-100); border-radius: var(--radius); border: 1px solid var(--slate-200); text-align: center;">
+                    <div style="font-size: 1.8rem; margin-bottom: 4px;">&#9889;</div>
+                    <div style="font-weight: 600; color: var(--slate-700); font-size: 0.85rem;">Seizure EMG Pattern</div>
+                    <div style="color: var(--slate-600); font-size: 0.78rem; margin-top: 2px;">Eyelid myoclonia captured during clinical monitoring</div>
                 </div>
                 <!-- Generated EMG chart: Eyelid Myoclonia pattern -->
                 <div class="emg-chart-box fade-up">
@@ -1026,13 +947,10 @@
 <!-- ────── CTA ────── -->
 <section class="cta">
     <div class="container">
-        <!-- Team photo upload -->
-        <div class="img-slot" data-slot="team" style="max-width:400px; margin: 0 auto 40px; padding: 20px; background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2);">
-            <input type="file" accept="image/*">
-            <img class="slot-preview" alt="Team photo" style="border-radius:12px;">
-            <span class="slot-icon" style="color:#94a3b8;">&#128101;</span>
-            <span class="slot-label" style="color:#94a3b8;"><strong style="color:#cbd5e1;">Team Photo</strong><br>Founders / team</span>
-            <button class="upload-btn" type="button">Upload Photo</button>
+        <!-- Team placeholder -->
+        <div style="max-width:400px; margin: 0 auto 40px; padding: 28px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius); text-align: center;">
+            <div style="font-size: 2.2rem; margin-bottom: 6px;">&#128101;</div>
+            <div style="font-weight: 600; color: #cbd5e1; font-size: 0.9rem;">The BlinkAid Team</div>
         </div>
         <h2>The future of neurological monitoring<br>is sitting on your nose</h2>
         <p>
@@ -1052,37 +970,6 @@
 
 <!-- ────── SCRIPTS ────── -->
 <script>
-// ── Inline upload slots ──
-document.querySelectorAll('.img-slot input[type="file"]').forEach(input => {
-    input.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        const slot = this.closest('.img-slot');
-        const slotName = slot.dataset.slot;
-        const preview = slot.querySelector('.slot-preview');
-
-        const reader = new FileReader();
-        reader.onload = function(ev) {
-            preview.src = ev.target.result;
-            slot.classList.add('has-image');
-            localStorage.setItem('blinkaid-' + slotName, ev.target.result);
-        };
-        reader.readAsDataURL(file);
-    });
-});
-
-// Restore uploads from localStorage on page load
-(function() {
-    document.querySelectorAll('.img-slot[data-slot]').forEach(slot => {
-        const stored = localStorage.getItem('blinkaid-' + slot.dataset.slot);
-        if (stored) {
-            const preview = slot.querySelector('.slot-preview');
-            preview.src = stored;
-            slot.classList.add('has-image');
-        }
-    });
-})();
-
 // ── Scroll fade-in animations ──
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
