@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BlinkAid — Neurological Monitoring Through Everyday Eyewear</title>
+    <title>BlinkAid — EMG Sensing Through Everyday Eyewear</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -72,6 +72,7 @@
         .pill--teal { background: #ccfbf1; color: #0f766e; }
         .pill--amber { background: #fef3c7; color: #92400e; }
         .pill--rose { background: #ffe4e6; color: #9f1239; }
+        .pill--emerald { background: #dcfce7; color: #166534; }
 
         /* ── Navigation ── */
         nav {
@@ -129,79 +130,193 @@
             background-clip: text;
         }
         .hero-stat .label { font-size: 0.78rem; color: var(--slate-600); font-weight: 500; margin-top: 2px; }
-
-        /* Hero visual */
         .hero-visual {
-            background: linear-gradient(135deg, var(--slate-100), #e0e7ff);
-            border-radius: var(--radius);
-            aspect-ratio: 4/3;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: var(--shadow-xl);
             position: relative;
-            overflow: hidden;
         }
         .hero-visual img {
-            width: 100%; height: 100%; object-fit: cover;
-        }
-        .hero-visual-placeholder {
-            text-align: center; color: var(--slate-600);
-            font-size: 0.9rem; font-weight: 500; padding: 24px;
-        }
-        .hero-visual-placeholder .icon { font-size: 3rem; margin-bottom: 8px; display: block; }
-
-        /* ── Problem Section ── */
-        .problem { background: var(--slate-900); color: white; }
-        .problem h2 { color: white; margin-bottom: 16px; }
-        .problem p.lead { color: var(--slate-300); font-size: 1.1rem; max-width: 680px; margin-bottom: 48px; }
-        .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .problem-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
+            width: 100%;
+            max-width: 480px;
             border-radius: var(--radius);
-            padding: 28px;
-            transition: transform 0.2s, background 0.2s;
+            box-shadow: var(--shadow-xl);
+            object-fit: contain;
         }
-        .problem-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.08); }
-        .problem-card .big-num {
-            font-size: 2.4rem; font-weight: 800;
-            background: linear-gradient(135deg, #60a5fa, #a78bfa);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-        }
-        .problem-card h3 { color: white; margin-bottom: 8px; font-size: 1rem; }
-        .problem-card p { color: var(--slate-300); font-size: 0.88rem; line-height: 1.5; }
 
-        /* ── How It Works ── */
-        .how { background: white; }
-        .how h2 { text-align: center; margin-bottom: 8px; }
-        .how .lead { text-align: center; color: var(--slate-600); font-size: 1.05rem; max-width: 600px; margin: 0 auto 56px; }
-        .how-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-        .step {
-            text-align: center; padding: 32px 20px;
-            border-radius: var(--radius); background: var(--slate-50);
-            border: 1px solid var(--slate-200);
+        /* ── Image Placeholders ── */
+        .img-placeholder {
+            background: var(--slate-100);
+            border: 2px dashed var(--slate-300);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 24px;
+            min-height: 200px;
+            color: var(--slate-600);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .img-placeholder .placeholder-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .img-placeholder .placeholder-text {
+            font-size: 0.72rem;
+            color: var(--slate-400);
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* ── Video Embed ── */
+        .video-embed {
             position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+        }
+        .video-embed iframe,
+        .video-embed .img-placeholder {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: 0;
+        }
+
+        /* ── The Signal Section ── */
+        .signal { background: white; }
+        .signal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .signal-panel {
+            background: var(--slate-50);
+            border: 1px solid var(--slate-200);
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: center;
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        .step:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-        .step-num {
-            width: 44px; height: 44px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--blue), var(--indigo));
-            color: white; font-weight: 700; font-size: 1.1rem;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 16px;
+        .signal-panel:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .signal-panel h4 {
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            color: var(--slate-800);
         }
-        .step h3 { font-size: 1rem; margin-bottom: 8px; }
-        .step p { font-size: 0.85rem; color: var(--slate-600); }
+        .signal-panel .signal-visuals {
+            display: grid;
+            grid-template-columns: 0.45fr 0.55fr;
+            gap: 12px;
+            align-items: center;
+        }
+        .signal-panel .signal-label {
+            display: inline-block;
+            padding: 4px 14px;
+            color: white;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        .signal-label--red { background: #dc2626; }
+        .signal-label--blue { background: #2563eb; }
+        .signal-label--orange { background: #ea580c; }
+        .signal-label--purple { background: #7c3aed; }
 
-        /* ── Disease Sections (PD + Epilepsy) ── */
-        .disease { position: relative; }
-        .disease--pd { background: linear-gradient(170deg, #eff6ff, #fafbfc); }
-        .disease--ep { background: linear-gradient(170deg, #faf5ff, #fafbfc); }
-        .disease-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
-        .disease h2 { margin-bottom: 8px; }
-        .disease .lead { font-size: 1.05rem; margin-bottom: 32px; color: var(--slate-600); }
+        /* ── Product Evolution ── */
+        .evolution { background: var(--slate-50); }
+        .evolution-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .evolution-card {
+            text-align: center;
+            background: white;
+            border-radius: var(--radius);
+            padding: 28px 20px;
+            border: 1px solid var(--slate-200);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .evolution-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .evolution-card:last-child {
+            border-color: var(--blue);
+            box-shadow: var(--shadow-md), 0 0 0 2px rgba(37,99,235,0.15);
+        }
+        .date-tag {
+            display: inline-block;
+            padding: 4px 14px;
+            background: linear-gradient(135deg, var(--blue), var(--indigo));
+            color: white;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .evolution-arrow {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--slate-300);
+            align-self: center;
+            justify-self: center;
+        }
+
+        /* ── Fatigue / Proven (Tier 1) ── */
+        .proven {
+            background: linear-gradient(170deg, #f0fdf4 0%, #fafbfc 100%);
+            border-top: 3px solid var(--emerald);
+        }
+        .proven-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        .tier-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .tier-badge--proven { background: #dcfce7; color: #166534; }
+        .tier-badge--future { background: #fef3c7; color: #92400e; }
+
+        /* ── Science / Mechanism ── */
+        .science { background: white; }
+        .science h2 { text-align: center; margin-bottom: 8px; }
+        .science .lead { text-align: center; color: var(--slate-600); font-size: 1.05rem; max-width: 640px; margin: 0 auto 48px; }
+        .mech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .mech-card {
+            border-radius: var(--radius);
+            padding: 32px;
+            border: 1px solid var(--slate-200);
+            background: var(--slate-50);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .mech-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .mech-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
+        .mech-card p { font-size: 0.88rem; color: var(--slate-600); }
+        .mech-card .tag { margin-bottom: 12px; }
+
+        /* ── Future Applications (Tier 2) ── */
+        .future {
+            background: linear-gradient(170deg, #fffbeb 0%, #fafbfc 100%);
+            border-top: 3px solid var(--amber);
+            position: relative;
+        }
+        .future .disease-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+        .future h2 { margin-bottom: 8px; }
+        .future .lead { font-size: 1.05rem; margin-bottom: 32px; color: var(--slate-600); }
 
         /* Evidence cards */
         .evidence-list { display: flex; flex-direction: column; gap: 16px; }
@@ -210,23 +325,20 @@
             border-radius: var(--radius-sm);
             padding: 20px 24px;
             box-shadow: var(--shadow-sm);
-            border-left: 4px solid var(--blue);
+            border-left: 4px solid var(--amber);
             transition: box-shadow 0.2s;
         }
-        .disease--ep .evidence { border-left-color: var(--purple); }
         .evidence:hover { box-shadow: var(--shadow-md); }
         .evidence h4 { font-size: 0.95rem; margin-bottom: 4px; }
         .evidence p { font-size: 0.85rem; color: var(--slate-600); line-height: 1.5; }
         .evidence .cite {
-            font-size: 0.75rem; color: var(--blue); margin-top: 6px;
+            font-size: 0.75rem; color: var(--amber); margin-top: 6px;
         }
         .evidence .cite a {
-            color: var(--blue); text-decoration: none; font-style: italic;
+            color: var(--amber); text-decoration: none; font-style: italic;
             transition: color 0.15s;
         }
-        .evidence .cite a:hover { color: var(--indigo); text-decoration: underline; }
-        .disease--ep .evidence .cite a { color: var(--purple); }
-        .disease--ep .evidence .cite a:hover { color: #6d28d9; }
+        .evidence .cite a:hover { color: #b45309; text-decoration: underline; }
 
         /* Side panel with key stats */
         .stat-box {
@@ -238,14 +350,7 @@
         }
         .stat-box .big {
             font-size: 2.2rem; font-weight: 800; line-height: 1.1;
-        }
-        .stat-box--pd .big {
-            background: linear-gradient(135deg, var(--blue), var(--teal));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .stat-box--ep .big {
-            background: linear-gradient(135deg, var(--purple), var(--rose));
+            background: linear-gradient(135deg, var(--amber), #b45309);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             background-clip: text;
         }
@@ -272,23 +377,60 @@
         .emg-chart-box .chart-legend .dot {
             width: 10px; height: 10px; border-radius: 50%; display: inline-block;
         }
-
-        /* ── Science / Mechanism ── */
-        .science { background: white; }
-        .science h2 { text-align: center; margin-bottom: 8px; }
-        .science .lead { text-align: center; color: var(--slate-600); font-size: 1.05rem; max-width: 640px; margin: 0 auto 48px; }
-        .mech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-        .mech-card {
-            border-radius: var(--radius);
-            padding: 32px;
-            border: 1px solid var(--slate-200);
-            background: var(--slate-50);
-            transition: transform 0.2s, box-shadow 0.2s;
+        .emg-chart-box .illustrative-note {
+            font-size: 0.7rem; color: var(--slate-400); font-style: italic; margin-top: 8px; text-align: center;
         }
-        .mech-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-        .mech-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
-        .mech-card p { font-size: 0.88rem; color: var(--slate-600); }
-        .mech-card .tag { margin-bottom: 12px; }
+
+        /* Published evidence banner */
+        .published-banner {
+            background: rgba(217,119,6,0.08);
+            border: 1px solid rgba(217,119,6,0.2);
+            border-radius: var(--radius);
+            padding: 36px;
+            text-align: center;
+            margin-top: 48px;
+        }
+        .published-banner .banner-label {
+            font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em;
+            color: var(--amber); font-weight: 700; margin-bottom: 16px;
+        }
+        .published-banner .banner-stats {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+            max-width: 700px; margin: 0 auto;
+        }
+        .published-banner .banner-num {
+            font-size: 2rem; font-weight: 800;
+            background: linear-gradient(135deg, var(--amber), #b45309);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .published-banner .banner-desc {
+            font-size: 0.8rem; color: var(--slate-600); margin-top: 4px;
+        }
+
+        /* Indication sub-section */
+        .indication-block {
+            padding-top: 48px;
+            margin-top: 48px;
+            border-top: 1px solid rgba(217,119,6,0.15);
+        }
+        .indication-block:first-of-type {
+            padding-top: 0;
+            margin-top: 0;
+            border-top: none;
+        }
+        .indication-label {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 12px;
+        }
+        .indication-label--ep { background: #ede9fe; color: #5b21b6; }
+        .indication-label--pd { background: #dbeafe; color: var(--blue-dark); }
 
         /* ── Competitive ── */
         .competitive { background: var(--slate-50); }
@@ -317,31 +459,33 @@
         .check { color: var(--emerald); font-weight: 700; }
         .cross { color: var(--slate-300); }
 
-        /* ── Bibliography ── */
-        .biblio { background: white; }
-        .biblio h2 { text-align: center; margin-bottom: 12px; }
-        .biblio .lead { text-align: center; color: var(--slate-600); margin-bottom: 40px; }
-        .bib-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-        .bib-item {
+        /* ── Team ── */
+        .team-section { background: white; }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 900px;
+            margin: 40px auto 0;
+        }
+        .team-card {
+            text-align: center;
             background: var(--slate-50);
-            border-radius: var(--radius-sm);
-            padding: 16px 20px;
+            border-radius: var(--radius);
+            padding: 32px 20px;
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--slate-200);
-            font-size: 0.82rem; color: var(--slate-700);
-            line-height: 1.5;
-            transition: box-shadow 0.2s, border-color 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-        .bib-item:hover { box-shadow: var(--shadow-sm); border-color: var(--blue-light); }
-        .bib-item a {
-            text-decoration: none; color: inherit; display: block;
+        .team-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .team-card .team-role {
+            font-size: 0.82rem; color: var(--blue); font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.04em;
+            margin-bottom: 4px;
         }
-        .bib-item strong { color: var(--slate-900); }
-        .bib-item .bib-link {
-            display: inline-flex; align-items: center; gap: 4px;
-            font-size: 0.75rem; color: var(--blue); margin-top: 6px;
-            font-weight: 500;
-        }
-        .bib-item .bib-link:hover { text-decoration: underline; }
+        .team-card h3 { font-size: 1.05rem; margin-bottom: 2px; }
+        .team-card .team-degree { font-size: 0.82rem; color: var(--slate-500); margin-bottom: 12px; }
+        .team-card p { font-size: 0.82rem; line-height: 1.5; }
 
         /* ── CTA ── */
         .cta {
@@ -376,19 +520,21 @@
         /* ── Responsive ── */
         @media (max-width: 900px) {
             .hero-grid { grid-template-columns: 1fr; }
-            .hero-visual { max-width: 400px; margin: 32px auto 0; }
-            .problem-grid { grid-template-columns: 1fr; }
-            .how-steps { grid-template-columns: repeat(2, 1fr); }
-            .disease-grid { grid-template-columns: 1fr; }
+            .hero-visual { margin: 32px auto 0; }
+            .hero-visual img { max-width: 320px; margin: 0 auto; }
+            .signal-grid { grid-template-columns: 1fr; }
+            .evolution-grid { grid-template-columns: 1fr; }
+            .proven-grid { grid-template-columns: 1fr; }
+            .future .disease-grid { grid-template-columns: 1fr; }
             .mech-grid { grid-template-columns: 1fr; }
-            .bib-grid { grid-template-columns: 1fr; }
-            .upload-grid { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: 1fr; max-width: 400px; }
             .comp-table { font-size: 0.8rem; }
             .nav-links { display: none; }
+            .published-banner .banner-stats { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 600px) {
-            .how-steps { grid-template-columns: 1fr; }
             .hero-stats { flex-direction: column; gap: 16px; }
+            .signal-panel .signal-visuals { grid-template-columns: 1fr; }
             section { padding: 56px 0; }
         }
 
@@ -405,14 +551,14 @@
 <!-- ────── NAV ────── -->
 <nav>
     <div class="container">
-        <div class="nav-logo">BlinkAid</div>
+        <a href="#" class="nav-logo"><img src="images/logo.svg" alt="BlinkAid" style="height:28px;"></a>
         <ul class="nav-links">
-            <li><a href="#problem">The Problem</a></li>
-            <li><a href="#how">How It Works</a></li>
-            <li><a href="#parkinsons">Parkinson's</a></li>
-            <li><a href="#epilepsy">Epilepsy</a></li>
+            <li><a href="#signal">The Signal</a></li>
+            <li><a href="#evolution">Product</a></li>
+            <li><a href="#proven">What We've Proven</a></li>
             <li><a href="#science">Science</a></li>
-            <li><a href="#references">References</a></li>
+            <li><a href="#future">Applications</a></li>
+            <li><a href="#team">Team</a></li>
         </ul>
     </div>
 </nav>
@@ -422,12 +568,12 @@
     <div class="container">
         <div class="hero-grid">
             <div class="fade-up">
-                <span class="pill pill--blue">Wearable Neuro-Sensing Platform</span>
+                <span class="pill pill--blue">EMG Sensing Through Everyday Eyewear</span>
                 <h1 style="margin-top: 16px;">
                     Seeing the Brain<br>Through the <span>Eyes</span>
                 </h1>
                 <p class="hero-sub">
-                    BlinkAid embeds EMG sensing electrodes into ordinary eyeglass nose pads to continuously monitor eye and facial muscle activity &mdash; unlocking digital biomarkers for Parkinson's disease and epilepsy.
+                    BlinkAid embeds EMG sensing electrodes into ordinary eyeglass nose pads to continuously monitor eye and facial muscle activity &mdash; capturing signals that cameras and EEG cannot.
                 </p>
                 <div class="hero-stats">
                     <div class="hero-stat">
@@ -444,235 +590,135 @@
                     </div>
                 </div>
             </div>
-            <div class="hero-visual fade-up" style="aspect-ratio: 4/3;">
-                <div class="hero-visual-placeholder">
-                    <span class="icon">&#128083;</span>
-                    BlinkAid Glasses Prototype
+            <div class="hero-visual fade-up">
+                <img src="images/neuroclips-2025.jpg?v=2" alt="BlinkAid NeuroClips clip-on prototype mounted on standard eyeglasses">
+            </div>
+        </div>
+        <!-- Demo Video -->
+        <div class="video-embed fade-up" style="max-width: 740px; margin: 48px auto 0;">
+            <iframe src="https://www.youtube.com/embed/X6faqOClfac" title="BlinkAid Demo @ SILMO 2025" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+</section>
+
+<!-- ────── THE SIGNAL IS REAL ────── -->
+<section class="signal" id="signal">
+    <div class="container">
+        <div style="text-align:center;">
+            <span class="pill pill--teal">The Signal</span>
+            <h2 style="margin-top: 16px;">This is what our sensor sees</h2>
+            <p class="lead" style="text-align:center; max-width:620px; margin:0 auto 48px; font-size:1.05rem;">
+                EMG electrodes in the nose pads capture distinct electrical signatures for every eye and facial movement &mdash; in real time.
+            </p>
+        </div>
+        <div class="signal-grid">
+            <div class="signal-panel fade-up">
+                <div style="overflow:hidden; border-radius:var(--radius-sm);"><img src="images/gaze right signal.gif" alt="Real-time EMG signal during rightward gaze" style="width:calc(100% + 8px); margin-left:-8px; display:block;"></div>
+                <span class="signal-label signal-label--red">Detected: Gaze Right</span>
+            </div>
+            <div class="signal-panel fade-up">
+                <div style="overflow:hidden; border-radius:var(--radius-sm);"><img src="images/gaze left signal.gif" alt="Real-time EMG signal during leftward gaze" style="width:calc(100% + 8px); margin-left:-8px; display:block;"></div>
+                <span class="signal-label signal-label--blue">Detected: Gaze Left</span>
+            </div>
+            <div class="signal-panel fade-up">
+                <img src="images/frown signal.gif" alt="Real-time EMG signal during frown" style="width:100%; border-radius:var(--radius-sm); display:block;">
+                <span class="signal-label signal-label--orange">Detected: Frown</span>
+            </div>
+            <div class="signal-panel fade-up">
+                <img src="images/blink signal.gif" alt="Real-time EMG signal during blink" style="width:100%; border-radius:var(--radius-sm); display:block;">
+                <span class="signal-label signal-label--purple">Detected: Blink</span>
+            </div>
+        </div>
+        <!-- GIFs are now inline in each signal panel above -->
+    </div>
+</section>
+
+<!-- ────── PRODUCT EVOLUTION ────── -->
+<section class="evolution" id="evolution">
+    <div class="container">
+        <div style="text-align:center;">
+            <span class="pill pill--blue">Hardware</span>
+            <h2 style="margin-top: 16px;">18 months. Three prototypes. Real data.</h2>
+            <p class="lead" style="text-align:center; max-width:600px; margin:0 auto 48px; font-size:1.05rem;">
+                We build, test, and iterate. Every prototype produced real EMG data from real people.
+            </p>
+        </div>
+        <div class="evolution-grid">
+            <div class="evolution-card fade-up">
+                <span class="date-tag">April 2023</span>
+                <div class="video-embed" style="margin-bottom:16px;">
+                    <iframe src="https://www.youtube.com/embed/OSXuC1RuuZU" title="BlinkAid Demo - April 2023 v1.2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
+                <h3>Dev Prototype</h3>
+                <p style="font-size:0.85rem; color:var(--slate-600);">
+                    First functional proof of concept. Exposed wires, breadboard electronics. Proved EMG signal capture from nose-pad electrodes is feasible.
+                </p>
+            </div>
+            <div class="evolution-card fade-up">
+                <span class="date-tag">Sep 2024</span>
+                <div class="video-embed" style="margin-bottom:16px;">
+                    <iframe src="https://www.youtube.com/embed/fuDVBZjuMT0" title="BlinkAid Demo - October 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <h3>&ldquo;PulseTech&rdquo; Frame</h3>
+                <p style="font-size:0.85rem; color:var(--slate-600);">
+                    Integrated glasses frame with custom PCB. First wearable form factor. 8-channel EMG + accelerometer. Used in driving simulator experiments.
+                </p>
+            </div>
+            <div class="evolution-card fade-up">
+                <span class="date-tag">Sep 2025</span>
+                <div class="video-embed" style="margin-bottom:16px;">
+                    <iframe src="https://www.youtube.com/embed/X6faqOClfac" title="BlinkAid Demo @ SILMO 2025" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <h3>&ldquo;NeuroClips&rdquo; Clip-on</h3>
+                <p style="font-size:0.85rem; color:var(--slate-600);">
+                    Universal clip-on module for any existing glasses. Smaller, lighter, discreet. Demonstrated at SILMO 2025 optics expo.
+                </p>
+            </div>
+        </div>
+        <!-- PCB + Electrodes -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px; margin-top:32px; max-width:740px; margin-left:auto; margin-right:auto;">
+            <div class="fade-up" style="text-align:center;">
+                <img src="images/img.png" alt="BlinkAid custom PCB with Intan RHD2132 chip inside 3D-printed enclosure" style="width:100%; border-radius:var(--radius-sm); box-shadow:var(--shadow-md);">
+                <p style="font-size:0.8rem; color:var(--slate-600); margin-top:8px; font-weight:500;">Custom PCB &mdash; Intan RHD2132</p>
+            </div>
+            <div class="fade-up" style="text-align:center;">
+                <img src="images/img_2.png" alt="Electrode and nose-pad prototype iterations" style="width:100%; border-radius:var(--radius-sm); box-shadow:var(--shadow-md);">
+                <p style="font-size:0.8rem; color:var(--slate-600); margin-top:8px; font-weight:500;">Nose-Pad Electrode Iterations</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ────── PROBLEM ────── -->
-<section class="problem" id="problem">
+<!-- ────── FATIGUE DETECTION (TIER 1: PROVEN) ────── -->
+<section class="proven" id="proven">
     <div class="container">
-        <span class="pill pill--rose">The Problem</span>
-        <h2 style="margin-top: 16px;">Neurological monitoring is stuck in the clinic</h2>
-        <p class="lead">
-            Patients with Parkinson's and epilepsy experience symptoms that fluctuate hour to hour &mdash; but their doctors only see snapshots during periodic clinic visits. Current monitoring tools are either uncomfortable, impractical, or unreliable.
+        <span class="tier-badge tier-badge--proven">&#10003; Demonstrated &mdash; Our Data</span>
+        <h2 style="margin-top: 16px;">Drowsiness &amp; Fatigue Detection</h2>
+        <p class="lead" style="font-size:1.05rem; margin-bottom:40px; max-width:680px;">
+            Our first validated application. Real device, real subjects, real EMG data. BlinkAid detects physiological muscle fatigue before visible signs appear.
         </p>
-        <div class="problem-grid">
-            <div class="problem-card fade-up">
-                <div class="big-num">55%</div>
-                <h3>Seizures go unreported</h3>
-                <p>Patients fail to document over half of their seizures in diaries. Self-reporting is dangerously unreliable.</p>
-            </div>
-            <div class="problem-card fade-up">
-                <div class="big-num">26&ndash;42%</div>
-                <h3>PD patients are initially misdiagnosed</h3>
-                <p>There is no definitive diagnostic test for Parkinson's. Over 30 conditions can mimic early symptoms.</p>
-            </div>
-            <div class="problem-card fade-up">
-                <div class="big-num">3&ndash;6 mo</div>
-                <h3>Between clinic visits</h3>
-                <p>PD motor fluctuations happen daily, yet medication adjustments rely on subjective recall from months-old visits.</p>
-            </div>
-            <div class="problem-card fade-up">
-                <div class="big-num">30%</div>
-                <h3>Drug-resistant epilepsy</h3>
-                <p>~15 million people worldwide have seizures that don't respond to medication. Continuous monitoring is critical.</p>
-            </div>
-            <div class="problem-card fade-up">
-                <div class="big-num">EEG</div>
-                <h3>Is impractical for daily life</h3>
-                <p>The gold-standard requires trained technicians, electrode gel, wires, and restricts normal activity.</p>
-            </div>
-            <div class="problem-card fade-up">
-                <div class="big-num">EOG</div>
-                <h3>Requires adhesive electrodes</h3>
-                <p>Traditional electro-oculography uses electrodes stuck to the face &mdash; uncomfortable, conspicuous, impractical for daily wear.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ────── HOW IT WORKS ────── -->
-<section class="how" id="how">
-    <div class="container">
-        <span class="pill pill--teal">The Solution</span>
-        <h2 style="margin-top: 16px;">Continuous neuro-sensing in ordinary eyewear</h2>
-        <p class="lead">
-            BlinkAid captures EMG signals from muscles around the eyes through electrodes embedded in standard nose pads &mdash; no adhesives, no cameras, no discomfort.
-        </p>
-        <div class="how-steps">
-            <div class="step fade-up">
-                <div class="step-num">1</div>
-                <h3>Wear</h3>
-                <p>Put on BlinkAid glasses like any pair of eyewear. Sensing electrodes in the nose pads make skin contact naturally.</p>
-            </div>
-            <div class="step fade-up">
-                <div class="step-num">2</div>
-                <h3>Sense</h3>
-                <p>8-channel EMG + accelerometer capture blink events, eye movements, saccades, and eyelid dynamics in real time.</p>
-            </div>
-            <div class="step fade-up">
-                <div class="step-num">3</div>
-                <h3>Analyze</h3>
-                <p>On-device and cloud ML extract digital biomarkers: blink rate, duration, symmetry, saccade latency, and more.</p>
-            </div>
-            <div class="step fade-up">
-                <div class="step-num">4</div>
-                <h3>Inform</h3>
-                <p>Clinicians and patients receive continuous insights: medication response, seizure events, symptom trends.</p>
-            </div>
-        </div>
-        <!-- Hardware diagram placeholder -->
-        <div class="fade-up" style="margin-top: 40px; max-width: 700px; margin-left: auto; margin-right: auto; padding: 48px 36px; background: var(--slate-100); border-radius: var(--radius); border: 1px solid var(--slate-200); text-align: center;">
-            <div style="font-size: 2.5rem; margin-bottom: 8px;">&#128295;</div>
-            <div style="font-weight: 600; color: var(--slate-700); font-size: 0.95rem;">Hardware Architecture</div>
-            <div style="color: var(--slate-600); font-size: 0.82rem; margin-top: 4px;">8-channel Intan EMG chip &middot; Nose-pad electrodes &middot; 3-axis accelerometer &middot; BLE SoC</div>
-        </div>
-    </div>
-</section>
-
-<!-- ────── PARKINSON'S ────── -->
-<section class="disease disease--pd" id="parkinsons">
-    <div class="container">
-        <span class="pill pill--blue">Application 1</span>
-        <h2 style="margin-top: 16px;">Parkinson's Disease Monitoring</h2>
-        <p class="lead">
-            Blink rate is a direct, non-invasive readout of central dopaminergic tone. Continuous blink monitoring can track medication response, motor fluctuations, and disease progression &mdash; all from the eyes.
-        </p>
-        <div class="disease-grid">
-            <div class="evidence-list">
-                <div class="evidence fade-up">
-                    <h4>Reduced Blink Rate = Dopamine Deficit</h4>
-                    <p>Healthy adults blink 15&ndash;24 times/min. PD patients drop to 3&ndash;15/min. This is directly correlated with striatal dopamine levels, confirmed by neuroimaging.</p>
-                    <div class="cite"><a href="https://n.neurology.org/content/34/5/677" target="_blank" rel="noopener">Karson, <em>Neurology</em> 1984</a> &middot; <a href="https://www.nature.com/articles/s41598-025-95182-9" target="_blank" rel="noopener">Vasudevan et al., <em>Scientific Reports</em> 2025</a></div>
-                </div>
-                <div class="evidence fade-up">
-                    <h4>Blink Dynamics Track Medication State</h4>
-                    <p>ML models using blink features achieved AUCROC of 0.87 for ON/OFF state classification &mdash; outperforming even plasma drug levels for dyskinesia detection (0.86 vs 0.45).</p>
-                    <div class="cite"><a href="https://www.nature.com/articles/s41531-025-01094-w" target="_blank" rel="noopener">Nishikawa et al., <em>npj Parkinson's Disease</em> 2025</a></div>
-                </div>
-                <div class="evidence fade-up">
-                    <h4>Saccade Abnormalities as Biomarkers</h4>
-                    <p>PD patients exhibit hypometric saccades, prolonged latency (~200ms vs ~140ms), and increased anti-saccade errors. Saccadic latency correlates with disease progression (r = 0.72).</p>
-                    <div class="cite"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12133813/" target="_blank" rel="noopener">Culicetto et al., <em>Frontiers in Aging Neuroscience</em> 2025</a></div>
-                </div>
-                <div class="evidence fade-up">
-                    <h4>EMG Reveals Eyelid Dysfunction</h4>
-                    <p>PD patients show longer blink duration, increased inter-phase pauses, blepharospasm, and apraxia of eyelid opening &mdash; all measurable via periocular EMG, making EMG-based sensing ideal for PD.</p>
-                    <div class="cite"><a href="https://pubmed.ncbi.nlm.nih.gov/18442139/" target="_blank" rel="noopener">Agostino et al., <em>Movement Disorders</em> 2008</a> &middot; <a href="https://academic.oup.com/brain/article-abstract/136/3/717/362862" target="_blank" rel="noopener">Bologna et al., <em>Brain</em> 2013</a></div>
-                </div>
-                <div class="evidence fade-up">
-                    <h4>Wearable Eye-Tracking Already Validated</h4>
-                    <p>Iwaki et al. used electrooculography eyeglasses in PD patients and achieved AUC of 0.902 for detecting wearing-off states &mdash; directly comparable to plasma L-dopa measurements.</p>
-                    <div class="cite"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6548932/" target="_blank" rel="noopener">Iwaki et al., <em>Internal Medicine</em> 2019</a></div>
-                </div>
-            </div>
-            <div class="disease-sidebar">
-                <div class="stat-box stat-box--pd">
-                    <div class="big">11.8M</div>
-                    <div class="desc">People with Parkinson's disease worldwide (2021), projected to reach 25.2M by 2050</div>
-                </div>
-                <div class="stat-box stat-box--pd">
-                    <div class="big">$51.9B</div>
-                    <div class="desc">Annual economic burden of PD in the US alone (Michael J. Fox Foundation)</div>
-                </div>
-                <div class="stat-box stat-box--pd">
-                    <div class="big">~50%</div>
-                    <div class="desc">Of patients develop motor fluctuations within 5 years of L-dopa therapy</div>
-                </div>
-                <!-- EMG signal placeholder -->
-                <div class="fade-up" style="margin-bottom:20px; padding: 24px; background: var(--slate-100); border-radius: var(--radius); border: 1px solid var(--slate-200); text-align: center;">
-                    <div style="font-size: 1.8rem; margin-bottom: 4px;">&#128200;</div>
-                    <div style="font-weight: 600; color: var(--slate-700); font-size: 0.85rem;">Real-time Blink EMG</div>
-                    <div style="color: var(--slate-600); font-size: 0.78rem; margin-top: 2px;">Live signal from BlinkAid nose-pad electrodes</div>
-                </div>
-                <!-- Generated EMG chart: PD blink rate comparison -->
-                <div class="emg-chart-box fade-up">
-                    <h4>Spontaneous Blink Rate: Healthy vs Parkinson's (EMG)</h4>
-                    <svg id="pd-emg-chart" viewBox="0 0 440 200" width="100%" xmlns="http://www.w3.org/2000/svg"></svg>
-                    <div class="chart-legend">
-                        <span><span class="dot" style="background:#3b82f6;"></span> Healthy (~18 blinks/min)</span>
-                        <span><span class="dot" style="background:#ef4444;"></span> Parkinson's (~7 blinks/min)</span>
+        <div class="proven-grid">
+            <div>
+                <div class="img-placeholder fade-up" style="aspect-ratio:16/10; margin-bottom:24px;">
+                    <div>
+                        <img src="images/psd.jpg"/>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ────── EPILEPSY ────── -->
-<section class="disease disease--ep" id="epilepsy">
-    <div class="container">
-        <span class="pill pill--purple">Application 2</span>
-        <h2 style="margin-top: 16px;">Epilepsy Seizure Detection</h2>
-        <p class="lead">
-            Seizures produce distinctive eye signatures &mdash; eyelid myoclonia, forced eye deviation, ictal blinking, and pupil changes. EMG-based eye monitoring can detect these events continuously, outside the hospital.
-        </p>
-        <div class="disease-grid">
-            <div class="evidence-list">
-                <div class="evidence fade-up">
-                    <h4>Eyelid Myoclonia is Measurable via EMG</h4>
-                    <p>Epilepsy with eyelid myoclonia (Jeavons syndrome) affects 1&ndash;2.7% of epilepsy patients. The hallmark &mdash; rapid eyelid fluttering at 3&ndash;6 Hz &mdash; is a strong EMG signal directly captured by periocular electrodes.</p>
-                    <div class="cite"><a href="https://onlinelibrary.wiley.com/doi/10.1111/epi.17607" target="_blank" rel="noopener">Smith et al., <em>Epilepsia</em> 2023 (International Expert Consensus)</a></div>
-                </div>
-                <div class="evidence fade-up">
-                    <h4>88.9% Seizure Detection from Eye Tracking</h4>
-                    <p>A glasses-type eye tracker achieved 88.9% sensitivity for absence seizure detection with zero false alarms and detection latency of only 2.87 seconds.</p>
-                    <div class="cite"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9722343/" target="_blank" rel="noopener">Matsumoto et al., <em>Clinical Neurophysiology</em> 2021</a></div>
-                </div>
-                <div class="evidence fade-up">
-                    <h4>Ictal Blinking as a Focal Seizure Marker</h4>
-                    <p>~8% of focal seizure patients exhibit ictal blinking &mdash; repetitive eyelid closure at higher-than-baseline frequency, detectable via EMG from periocular muscles.</p>
-                    <div class="cite"><a href="https://www.sciencedirect.com/science/article/pii/S1059131120301850" target="_blank" rel="noopener">Fasano et al., <em>Seizure: Eur. J. Epilepsy</em> 2020</a></div>
-                </div>
-                <div class="evidence fade-up">
-                    <h4>Wearable EMG Detects 93.8% of Tonic-Clonic Seizures</h4>
-                    <p>In a prospective, multicenter, blinded study of 71 patients (3,735 hours of monitoring), a single-channel wearable EMG device detected generalized tonic-clonic seizures with 93.8% sensitivity, 9-second median latency, and 66% of patients had zero false alarms. Class II clinical evidence.</p>
-                    <div class="cite"><a href="https://www.neurology.org/doi/10.1212/WNL.0000000000004893" target="_blank" rel="noopener">Beniczky et al., <em>Neurology</em> 2018</a></div>
-                </div>
-                <div class="evidence fade-up">
-                    <h4>EMG Features Classify Seizure Types at 99.95%</h4>
-                    <p>Using only 6 time-domain EMG features, an ANN classifier distinguished tonic, myoclonic, and normal states with 99.95% accuracy &mdash; feasible for real-time, low-power wearable processors.</p>
-                    <div class="cite"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10326816/" target="_blank" rel="noopener">Djemal et al., <em>Bioengineering</em> 2023</a></div>
-                </div>
-                <div class="evidence fade-up">
-                    <h4>Eye Deviation in Up to 80% of Absence Seizures</h4>
-                    <p>Forced upward eye deviation during absence seizures creates measurable EOG/EMG deflections. Combined with eyelid flutter detection, this offers multi-signal seizure confirmation.</p>
-                    <div class="cite"><a href="https://pubmed.ncbi.nlm.nih.gov/23365833/" target="_blank" rel="noopener">Li et al., <em>Vision-based absence seizure detection</em> 2013</a></div>
+                <div class="fade-up" style="margin-top:16px;">
+                    <img src="images/emg annotation dashboard.png" alt="BlinkAid EMG annotation dashboard with real-time signal traces and driving simulator video" style="width:100%; border-radius:var(--radius-sm); box-shadow:var(--shadow-md);">
                 </div>
             </div>
-            <div class="disease-sidebar">
-                <div class="stat-box stat-box--ep">
-                    <div class="big">50M+</div>
-                    <div class="desc">People with active epilepsy worldwide (WHO)</div>
-                </div>
-                <div class="stat-box stat-box--ep">
-                    <div class="big">$119B</div>
-                    <div class="desc">Global annual cost of epilepsy (<a href="https://onlinelibrary.wiley.com/doi/10.1111/epi.17165" target="_blank" rel="noopener" style="color:var(--purple);">Begley et al., <em>Epilepsia</em> 2022</a>)</div>
-                </div>
-                <div class="stat-box stat-box--ep">
-                    <div class="big">1 in 1,000</div>
-                    <div class="desc">Annual SUDEP (sudden death) risk. Monitoring reduces risk.</div>
-                </div>
-                <!-- Seizure EMG placeholder -->
-                <div class="fade-up" style="margin-bottom:20px; padding: 24px; background: var(--slate-100); border-radius: var(--radius); border: 1px solid var(--slate-200); text-align: center;">
-                    <div style="font-size: 1.8rem; margin-bottom: 4px;">&#9889;</div>
-                    <div style="font-weight: 600; color: var(--slate-700); font-size: 0.85rem;">Seizure EMG Pattern</div>
-                    <div style="color: var(--slate-600); font-size: 0.78rem; margin-top: 2px;">Eyelid myoclonia captured during clinical monitoring</div>
-                </div>
-                <!-- Generated EMG chart: Eyelid Myoclonia pattern -->
-                <div class="emg-chart-box fade-up">
-                    <h4>EMG Pattern: Normal Blinking vs Eyelid Myoclonia (Seizure)</h4>
-                    <svg id="ep-emg-chart" viewBox="0 0 440 200" width="100%" xmlns="http://www.w3.org/2000/svg"></svg>
-                    <div class="chart-legend">
-                        <span><span class="dot" style="background:#8b5cf6;"></span> Normal blink (~0.3 Hz)</span>
-                        <span><span class="dot" style="background:#ef4444;"></span> Eyelid myoclonia (~4 Hz burst)</span>
+            <div>
+                <div class="img-placeholder fade-up" style="aspect-ratio:4/3; margin-bottom:24px;">
+                    <div>
+                        <img src="images/drowsiness.png"/>
                     </div>
+                </div>
+                <div class="fade-up" style="background:white; border-radius:var(--radius); padding:24px; box-shadow:var(--shadow-sm); border-left:4px solid var(--emerald); margin-bottom:24px;">
+                    <h4 style="font-size:0.95rem; margin-bottom:8px; color:var(--slate-800);">What we measured</h4>
+                    <p style="font-size:0.88rem; line-height:1.6;">
+                        EMG power spectral density shifts reliably from 30&ndash;100 Hz (alert) to 10&ndash;30 Hz (fatigued). Combined with blink rate and blink duration changes, our sensor distinguishes alert from drowsy states in real driving experiments.
+                    </p>
                 </div>
             </div>
         </div>
@@ -691,12 +737,12 @@
             <div class="mech-card fade-up">
                 <div class="tag"><span class="pill pill--blue">Dopamine</span></div>
                 <h3>Blink rate reflects dopaminergic tone</h3>
-                <p>The basal ganglia regulate blinking through a GABAergic circuit involving the substantia nigra. Reduced dopamine in PD directly reduces spontaneous blink rate. L-dopa administration restores it. This has been confirmed pharmacologically and through neuroimaging.</p>
+                <p>The basal ganglia regulate blinking through a GABAergic circuit involving the substantia nigra. Reduced dopamine in PD directly reduces spontaneous blink rate. L-dopa administration restores it.</p>
             </div>
             <div class="mech-card fade-up">
                 <div class="tag"><span class="pill pill--purple">Seizure</span></div>
                 <h3>Seizures produce detectable eye EMG signatures</h3>
-                <p>Eyelid myoclonia generates high-amplitude, rhythmic EMG bursts at 3&ndash;6 Hz. Ictal blinking produces stereotyped orbicularis oculi activation. Eye deviation activates extraocular muscles. All are directly measurable via periocular EMG electrodes.</p>
+                <p>Eyelid myoclonia generates high-amplitude, rhythmic EMG bursts at 3&ndash;6 Hz. Ictal blinking produces stereotyped orbicularis oculi activation. These are directly measurable via periocular EMG electrodes.</p>
             </div>
             <div class="mech-card fade-up">
                 <div class="tag"><span class="pill pill--teal">EMG Advantage</span></div>
@@ -706,46 +752,140 @@
             <div class="mech-card fade-up">
                 <div class="tag"><span class="pill pill--amber">Digital Biomarkers</span></div>
                 <h3>Rich multi-dimensional feature space</h3>
-                <p>Beyond simple blink counting: blink duration, amplitude, symmetry, inter-phase pauses, saccade latency, micro-saccade frequency, and eyelid velocity all carry diagnostic information. ML models using these features outperform single-metric approaches.</p>
+                <p>Beyond simple blink counting: blink duration, amplitude, symmetry, inter-phase pauses, saccade latency, micro-saccade frequency, and eyelid velocity all carry diagnostic information.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ────── EMG VALIDATION BANNER ────── -->
-<section style="background: linear-gradient(135deg, #0f172a, #1e1b4b); padding: 60px 0;">
+<!-- ────── FUTURE APPLICATIONS (TIER 2) ────── -->
+<section class="future" id="future">
     <div class="container">
-        <div style="text-align:center; margin-bottom: 40px;">
-            <span class="pill pill--teal">Clinically Validated</span>
-            <h2 style="color:white; margin-top: 16px;">Wearable EMG for seizure detection is not theoretical</h2>
-            <p style="color:#94a3b8; max-width:600px; margin:12px auto 0; font-size:1.05rem;">A landmark multicenter clinical study proved that even a single-channel wearable EMG can detect seizures in real patients with clinical-grade accuracy.</p>
-        </div>
-        <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 900px; margin: 0 auto;">
-            <div style="text-align:center;">
-                <div style="font-size:2.2rem; font-weight:800; background:linear-gradient(135deg,#34d399,#3b82f6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">93.8%</div>
-                <div style="color:#94a3b8; font-size:0.82rem; margin-top:4px;">Seizure detection sensitivity</div>
-            </div>
-            <div style="text-align:center;">
-                <div style="font-size:2.2rem; font-weight:800; background:linear-gradient(135deg,#34d399,#3b82f6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">9 sec</div>
-                <div style="color:#94a3b8; font-size:0.82rem; margin-top:4px;">Median detection latency</div>
-            </div>
-            <div style="text-align:center;">
-                <div style="font-size:2.2rem; font-weight:800; background:linear-gradient(135deg,#34d399,#3b82f6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">71</div>
-                <div style="color:#94a3b8; font-size:0.82rem; margin-top:4px;">Patients across 3 centers</div>
-            </div>
-            <div style="text-align:center;">
-                <div style="font-size:2.2rem; font-weight:800; background:linear-gradient(135deg,#34d399,#3b82f6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">3,735h</div>
-                <div style="color:#94a3b8; font-size:0.82rem; margin-top:4px;">Of validated recording time</div>
-            </div>
-        </div>
-        <p style="text-align:center; color:#64748b; font-size:0.82rem; margin-top:28px; font-style:italic;">
-            <a href="https://www.neurology.org/doi/10.1212/WNL.0000000000004893" target="_blank" rel="noopener" style="color:#60a5fa;">Beniczky et al., <em>Neurology</em> 2018</a> &mdash; If a single EMG channel on the bicep achieves this, imagine what 8-channel periocular EMG can do.
+        <span class="tier-badge tier-badge--future">&#128301; Research Directions &mdash; Published Evidence</span>
+        <h2 style="margin-top: 16px;">Where the platform goes next</h2>
+        <p class="lead">
+            Peer-reviewed research validates the feasibility of EMG-based monitoring for neurological conditions. These are research directions we are actively exploring &mdash; supported by decades of published clinical evidence.
         </p>
+
+        <!-- ── EPILEPSY (first, per Yechiam) ── -->
+        <div class="indication-block">
+            <span class="indication-label indication-label--ep">Epilepsy</span>
+            <h3 style="font-size:1.3rem; margin-bottom:8px;">Seizure Detection</h3>
+            <p style="font-size:0.95rem; margin-bottom:24px;">Published research shows that eye-based signals &mdash; blink patterns, gaze changes, and periocular EMG &mdash; can detect seizure events with clinical-grade accuracy.</p>
+
+            <div class="disease-grid">
+                <div class="evidence-list">
+                    <div class="evidence fade-up">
+                        <h4>88.9% Seizure Detection from Eye Tracking</h4>
+                        <p>A glasses-type eye tracker achieved 88.9% sensitivity for absence seizure detection with zero false alarms and detection latency of only 2.87 seconds.</p>
+                        <div class="cite"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9722343/" target="_blank" rel="noopener">Matsumoto et al., <em>Clinical Neurophysiology</em> 2021</a></div>
+                    </div>
+                    <div class="evidence fade-up">
+                        <h4>Wearable EMG Detects 93.8% of Tonic-Clonic Seizures</h4>
+                        <p>In a multicenter study of 71 patients (3,735 hours of monitoring), a single-channel wearable EMG device detected generalized tonic-clonic seizures with 93.8% sensitivity and 9-second median latency.</p>
+                        <div class="cite"><a href="https://www.neurology.org/doi/10.1212/WNL.0000000000004893" target="_blank" rel="noopener">Beniczky et al., <em>Neurology</em> 2018</a></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="stat-box">
+                        <div class="big">50M+</div>
+                        <div class="desc">People with active epilepsy worldwide (WHO)</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="big">$119B</div>
+                        <div class="desc">Global annual cost of epilepsy (<a href="https://onlinelibrary.wiley.com/doi/10.1111/epi.17165" target="_blank" rel="noopener" style="color:var(--amber);">Begley et al., 2022</a>)</div>
+                    </div>
+                    <!-- Illustrative EMG chart -->
+                    <div class="emg-chart-box fade-up">
+                        <h4>Illustrative: Normal Blinking vs Eyelid Myoclonia</h4>
+                        <svg id="ep-emg-chart" viewBox="0 0 440 200" width="100%" xmlns="http://www.w3.org/2000/svg"></svg>
+                        <div class="chart-legend">
+                            <span><span class="dot" style="background:#8b5cf6;"></span> Normal blink (~0.3 Hz)</span>
+                            <span><span class="dot" style="background:#ef4444;"></span> Eyelid myoclonia (~4 Hz burst)</span>
+                        </div>
+                        <div class="illustrative-note">Conceptual illustration based on published literature &mdash; not BlinkAid data</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Published Evidence Banner (reframed) -->
+        <div class="published-banner fade-up">
+            <div class="banner-label">Published Clinical Evidence (Not BlinkAid Results)</div>
+            <div class="banner-stats">
+                <div>
+                    <div class="banner-num">93.8%</div>
+                    <div class="banner-desc">Seizure detection sensitivity</div>
+                </div>
+                <div>
+                    <div class="banner-num">9 sec</div>
+                    <div class="banner-desc">Median detection latency</div>
+                </div>
+                <div>
+                    <div class="banner-num">71</div>
+                    <div class="banner-desc">Patients across 3 centers</div>
+                </div>
+                <div>
+                    <div class="banner-num">3,735h</div>
+                    <div class="banner-desc">Validated recording time</div>
+                </div>
+            </div>
+            <p style="font-size:0.82rem; color:var(--slate-500); margin-top:20px; font-style:italic;">
+                <a href="https://www.neurology.org/doi/10.1212/WNL.0000000000004893" target="_blank" rel="noopener" style="color:var(--amber);">Beniczky et al., <em>Neurology</em> 2018</a> &mdash; Demonstrated on a single-channel bicep-worn EMG sensor. BlinkAid&rsquo;s 8-channel periocular EMG targets comparable or superior performance.
+            </p>
+        </div>
+
+        <!-- ── PARKINSON'S ── -->
+        <div class="indication-block">
+            <span class="indication-label indication-label--pd">Parkinson&rsquo;s Disease</span>
+            <h3 style="font-size:1.3rem; margin-bottom:8px;">Continuous Monitoring via Blink Biomarkers</h3>
+            <p style="font-size:0.95rem; margin-bottom:24px;">Blink rate is a direct, non-invasive readout of central dopaminergic tone. Published research shows that continuous blink monitoring can track medication response and disease progression.</p>
+
+            <div class="disease-grid">
+                <div class="evidence-list">
+                    <div class="evidence fade-up">
+                        <h4>Reduced Blink Rate = Dopamine Deficit</h4>
+                        <p>Healthy adults blink 15&ndash;24 times/min. PD patients drop to 3&ndash;15/min. This is directly correlated with striatal dopamine levels, confirmed by neuroimaging.</p>
+                        <div class="cite"><a href="https://n.neurology.org/content/34/5/677" target="_blank" rel="noopener">Karson, <em>Neurology</em> 1984</a> &middot; <a href="https://www.nature.com/articles/s41598-025-95182-9" target="_blank" rel="noopener">Vasudevan et al., <em>Scientific Reports</em> 2025</a></div>
+                    </div>
+                    <div class="evidence fade-up">
+                        <h4>Blink Dynamics Track Medication State</h4>
+                        <p>ML models using blink features achieved AUCROC of 0.87 for ON/OFF state classification &mdash; outperforming even plasma drug levels for dyskinesia detection (0.86 vs 0.45).</p>
+                        <div class="cite"><a href="https://www.nature.com/articles/s41531-025-01094-w" target="_blank" rel="noopener">Nishikawa et al., <em>npj Parkinson's Disease</em> 2025</a></div>
+                    </div>
+                    <div class="evidence fade-up">
+                        <h4>Wearable Eye-Tracking Already Validated</h4>
+                        <p>Iwaki et al. used electrooculography eyeglasses in PD patients and achieved AUC of 0.902 for detecting wearing-off states &mdash; directly comparable to plasma L-dopa measurements.</p>
+                        <div class="cite"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6548932/" target="_blank" rel="noopener">Iwaki et al., <em>Internal Medicine</em> 2019</a></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="stat-box">
+                        <div class="big">11.8M</div>
+                        <div class="desc">People with Parkinson's disease worldwide (2021), projected to reach 25.2M by 2050</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="big">$51.9B</div>
+                        <div class="desc">Annual economic burden of PD in the US alone (Michael J. Fox Foundation)</div>
+                    </div>
+                    <!-- Illustrative EMG chart -->
+                    <div class="emg-chart-box fade-up">
+                        <h4>Illustrative: Healthy vs Parkinson's Blink Rate</h4>
+                        <svg id="pd-emg-chart" viewBox="0 0 440 200" width="100%" xmlns="http://www.w3.org/2000/svg"></svg>
+                        <div class="chart-legend">
+                            <span><span class="dot" style="background:#3b82f6;"></span> Healthy (~18 blinks/min)</span>
+                            <span><span class="dot" style="background:#ef4444;"></span> Parkinson's (~7 blinks/min)</span>
+                        </div>
+                        <div class="illustrative-note">Conceptual illustration based on published literature &mdash; not BlinkAid data</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
 <!-- ────── COMPETITIVE LANDSCAPE ────── -->
-<section class="competitive">
+<section class="competitive" id="landscape">
     <div class="container">
         <span class="pill pill--rose" style="display:block; text-align:center;">Landscape</span>
         <h2 style="margin-top: 16px;">How BlinkAid compares</h2>
@@ -821,124 +961,34 @@
     </div>
 </section>
 
-<!-- ────── BIBLIOGRAPHY ────── -->
-<section class="biblio" id="references">
+<!-- ────── TEAM ────── -->
+<section class="team-section" id="team">
     <div class="container">
-        <span class="pill pill--blue" style="display:block; text-align:center;">References</span>
-        <h2 style="margin-top: 16px;">Key Scientific Literature</h2>
-        <p class="lead">The clinical case for eye-based neuro-monitoring is built on decades of peer-reviewed research.</p>
-        <div class="bib-grid">
-            <div class="bib-item">
-                <a href="https://academic.oup.com/brain/article-abstract/106/3/643/271933" target="_blank" rel="noopener">
-                    <strong>Karson CN (1983)</strong><br>
-                    "Spontaneous eye-blink rates and dopaminergic systems." <em>Brain</em>, 106(3), 643&ndash;653.
-                    <span class="bib-link">&#8599; View paper</span>
-                </a>
+        <div style="text-align:center;">
+            <span class="pill pill--blue">Team</span>
+            <h2 style="margin-top: 16px;">BlinkAid&rsquo;s Leadership</h2>
+        </div>
+        <div class="team-grid">
+            <div class="team-card fade-up">
+                <img src="images/yechiam.png" alt="Yechiam Sapir" style="width:110px; height:110px; border-radius:50%; object-fit:cover; margin:0 auto 16px; display:block; box-shadow:var(--shadow-sm);">
+                <div class="team-role">CEO</div>
+                <h3>Yechiam Sapir</h3>
+                <div class="team-degree">PhD, Neuroscience</div>
+                <p>Deep experience in medical device innovation. Former Head of Innovation at Surgical Monitoring. PhD in Neuroscience from Hebrew University, Harvard postdoctoral fellowship.</p>
             </div>
-            <div class="bib-item">
-                <a href="https://n.neurology.org/content/34/5/677" target="_blank" rel="noopener">
-                    <strong>Karson CN et al. (1984)</strong><br>
-                    "Blink rates and disorders of movement." <em>Neurology</em>, 34(5), 677.
-                    <span class="bib-link">&#8599; View paper</span>
-                </a>
+            <div class="team-card fade-up">
+                <img src="images/raz.png" alt="Raz Karl" style="width:110px; height:110px; border-radius:50%; object-fit:cover; margin:0 auto 16px; display:block; box-shadow:var(--shadow-sm);">
+                <div class="team-role">CTO</div>
+                <h3>Raz Karl</h3>
+                <div class="team-degree">B.Sc Computer Science, B.Des Industrial Design</div>
+                <p>Over a decade in software, cybersecurity, and product design. Dual degrees from Hebrew University and Bezalel. Award-winning FIRST robotics team leader.</p>
             </div>
-            <div class="bib-item">
-                <a href="https://www.nature.com/articles/s41531-025-01094-w" target="_blank" rel="noopener">
-                    <strong>Nishikawa N et al. (2025)</strong><br>
-                    "Spontaneous eye blink-based ML for tracking clinical fluctuations in PD." <em>npj Parkinson's Disease</em>, 11, 247.
-                    <span class="bib-link">&#8599; View paper</span>
-                </a>
-            </div>
-            <div class="bib-item">
-                <a href="https://www.nature.com/articles/s41598-025-95182-9" target="_blank" rel="noopener">
-                    <strong>Vasudevan V et al. (2025)</strong><br>
-                    "Revisiting eye blink in Parkinson's disease." <em>Scientific Reports</em>, 15, 10751.
-                    <span class="bib-link">&#8599; View paper</span>
-                </a>
-            </div>
-            <div class="bib-item">
-                <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6548932/" target="_blank" rel="noopener">
-                    <strong>Iwaki H et al. (2019)</strong><br>
-                    "Using spontaneous eye-blink rates to predict the motor status of patients with PD." <em>Internal Medicine</em>, 58(10), 1417&ndash;1421.
-                    <span class="bib-link">&#8599; View paper</span>
-                </a>
-            </div>
-            <div class="bib-item">
-                <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12133813/" target="_blank" rel="noopener">
-                    <strong>Culicetto L et al. (2025)</strong><br>
-                    "Eye tracking and eye movements in Parkinson's disease." <em>Frontiers in Aging Neuroscience</em>.
-                    <span class="bib-link">&#8599; View paper</span>
-                </a>
-            </div>
-            <div class="bib-item">
-                <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9722343/" target="_blank" rel="noopener">
-                    <strong>Matsumoto H et al. (2021)</strong><br>
-                    "Detection of absence seizures using a glasses-type eye tracker." <em>Clinical Neurophysiology</em>.
-                    <span class="bib-link">&#8599; View paper</span>
-                </a>
-            </div>
-            <div class="bib-item">
-                <a href="https://onlinelibrary.wiley.com/doi/10.1111/epi.17607" target="_blank" rel="noopener">
-                    <strong>Smith et al. (2023)</strong><br>
-                    "Clinical presentation of epilepsy with eyelid myoclonia: International expert consensus." <em>Epilepsia</em>.
-                    <span class="bib-link">&#8599; View paper</span>
-                </a>
-            </div>
-            <div class="bib-item">
-                <a href="https://www.sciencedirect.com/science/article/pii/S1059131120301850" target="_blank" rel="noopener">
-                    <strong>Fasano RE et al. (2020)</strong><br>
-                    "Ictal blinking in focal seizures: Insights from SEEG recordings." <em>Seizure: Eur. J. Epilepsy</em>.
-                    <span class="bib-link">&#8599; View paper</span>
-                </a>
-            </div>
-            <div class="bib-item">
-                <a href="https://jamanetwork.com/journals/jamaneurology/fullarticle/793802" target="_blank" rel="noopener">
-                    <strong>Hoppe C, Poepel A, Elger CE (2007)</strong><br>
-                    "Epilepsy: Accuracy of patient seizure counts." <em>Archives of Neurology</em>.
-                    <span class="bib-link">&#8599; View paper</span>
-                </a>
-            </div>
-            <div class="bib-item">
-                <a href="https://academic.oup.com/brain/article-abstract/136/3/717/362862" target="_blank" rel="noopener">
-                    <strong>Bologna M et al. (2013)</strong><br>
-                    "Blink reflex and brainstem circuits in Parkinson's disease." <em>Brain</em>.
-                    <span class="bib-link">&#8599; View paper</span>
-                </a>
-            </div>
-            <div class="bib-item">
-                <a href="https://onlinelibrary.wiley.com/doi/10.1111/epi.17165" target="_blank" rel="noopener">
-                    <strong>Begley CE et al. (2022)</strong><br>
-                    "The global cost of epilepsy: A systematic review and extrapolation." <em>Epilepsia</em>.
-                    <span class="bib-link">&#8599; View paper</span>
-                </a>
-            </div>
-            <div class="bib-item">
-                <a href="https://pubmed.ncbi.nlm.nih.gov/18442139/" target="_blank" rel="noopener">
-                    <strong>Agostino R et al. (2008)</strong><br>
-                    "Voluntary, spontaneous, and reflex blinking in Parkinson's disease." <em>Movement Disorders</em>.
-                    <span class="bib-link">&#8599; View paper</span>
-                </a>
-            </div>
-            <div class="bib-item">
-                <a href="https://onlinelibrary.wiley.com/doi/10.1111/epi.17900" target="_blank" rel="noopener">
-                    <strong>Brown BM, Haneef Z et al. (2024)</strong><br>
-                    "Computer vision for automated seizure detection: A systematic review." <em>Epilepsia</em>.
-                    <span class="bib-link">&#8599; View paper</span>
-                </a>
-            </div>
-            <div class="bib-item">
-                <a href="https://www.neurology.org/doi/10.1212/WNL.0000000000004893" target="_blank" rel="noopener">
-                    <strong>Beniczky S et al. (2018)</strong><br>
-                    "Automated real-time detection of tonic-clonic seizures using a wearable EMG device." <em>Neurology</em>, 90(5), e428&ndash;e434.
-                    <span class="bib-link">&#8599; View paper</span>
-                </a>
-            </div>
-            <div class="bib-item">
-                <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10326816/" target="_blank" rel="noopener">
-                    <strong>Djemal A et al. (2023)</strong><br>
-                    "Wearable electromyography classification of epileptic seizures: A feasibility study." <em>Bioengineering</em>.
-                    <span class="bib-link">&#8599; View paper</span>
-                </a>
+            <div class="team-card fade-up">
+                <img src="images/iftach.png" alt="Iftach Yassur" style="width:110px; height:110px; border-radius:50%; object-fit:cover; margin:0 auto 16px; display:block; box-shadow:var(--shadow-sm);">
+                <div class="team-role">CMO</div>
+                <h3>Iftach Yassur</h3>
+                <div class="team-degree">MD, Ophthalmology</div>
+                <p>Senior ophthalmologist and head of Oculoplastics at Rabin Medical Center. Over 25 years of clinical experience. Leading expert in blink disorders and eyelid surgery.</p>
             </div>
         </div>
     </div>
@@ -947,23 +997,18 @@
 <!-- ────── CTA ────── -->
 <section class="cta">
     <div class="container">
-        <!-- Team placeholder -->
-        <div style="max-width:400px; margin: 0 auto 40px; padding: 28px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius); text-align: center;">
-            <div style="font-size: 2.2rem; margin-bottom: 6px;">&#128101;</div>
-            <div style="font-weight: 600; color: #cbd5e1; font-size: 0.9rem;">The BlinkAid Team</div>
-        </div>
         <h2>The future of neurological monitoring<br>is sitting on your nose</h2>
         <p>
-            BlinkAid is building the first comfortable, continuous, EMG-based neuro-sensing platform for everyday eyewear. We're looking for clinical partners, investors, and collaborators.
+            BlinkAid is building the first comfortable, continuous, EMG-based neuro-sensing platform for everyday eyewear. We&rsquo;re looking for clinical partners, investors, and collaborators.
         </p>
-        <a href="mailto:contact@blinkaid.com" class="cta-btn">Get in Touch</a>
+        <a href="mailto:yechiam@blinkaid.com" class="cta-btn">Get in Touch</a>
     </div>
 </section>
 
 <!-- ────── FOOTER ────── -->
 <footer>
     <div class="container">
-        <p>BlinkAid &copy; 2025. This is an early-stage technology. All medical applications discussed represent potential future research directions, not established clinical capabilities.</p>
+        <p>BlinkAid &copy; 2025. Future applications (Parkinson&rsquo;s, Epilepsy) represent research directions supported by published literature, not established clinical capabilities. Drowsiness detection results are from BlinkAid&rsquo;s own experimental data.</p>
     </div>
 </footer>
 
@@ -978,25 +1023,21 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-// ── Generate PD EMG chart ──
+// ── Generate PD EMG chart (illustrative) ──
 (function() {
     const svg = document.getElementById('pd-emg-chart');
     if (!svg) return;
 
-    // Seeded pseudo-random for reproducibility
     let seed = 42;
     function rand() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
 
     const W = 440, H = 200;
-    const midTop = 55, midBot = 145;
 
-    // Background
     const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
     bg.setAttribute('width', W); bg.setAttribute('height', H);
     bg.setAttribute('rx', '8'); bg.setAttribute('fill', '#f8fafc');
     svg.appendChild(bg);
 
-    // Axis labels
     function addText(x, y, text, size, color, anchor) {
         const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         t.setAttribute('x', x); t.setAttribute('y', y);
@@ -1008,10 +1049,9 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     }
 
     addText(8, 18, 'Healthy', '10', '#3b82f6', 'start');
-    addText(8, midBot - 30, 'Parkinson\'s', '10', '#ef4444', 'start');
+    addText(8, 118, 'Parkinson\'s', '10', '#ef4444', 'start');
     addText(W - 8, H - 4, '10 seconds', '9', '#94a3b8', 'end');
 
-    // Separator line
     const sep = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     sep.setAttribute('x1', 0); sep.setAttribute('x2', W);
     sep.setAttribute('y1', 100); sep.setAttribute('y2', 100);
@@ -1028,14 +1068,13 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
         for (let i = 0; i < numPoints; i++) {
             const x = i * xStep;
-            let y = baseline + (rand() - 0.5) * 4; // noise
+            let y = baseline + (rand() - 0.5) * 4;
 
             if (i * xStep > nextBlink && blinkPhase < 0) {
                 blinkPhase = 0;
             }
 
             if (blinkPhase >= 0 && blinkPhase < 12) {
-                // Blink spike shape: quick up, quick down
                 const t = blinkPhase / 12;
                 const spike = Math.sin(t * Math.PI) * spikeAmp;
                 y = baseline - spike;
@@ -1046,7 +1085,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
                 }
             }
 
-            points.push(`${x.toFixed(1)},${(y + yOffset).toFixed(1)}`);
+            points.push(x.toFixed(1) + ',' + (y + yOffset).toFixed(1));
         }
 
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
@@ -1058,16 +1097,13 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         svg.appendChild(path);
     }
 
-    // Healthy: ~18 blinks/min = ~3 blinks in 10s, more frequent spikes
     seed = 42;
     generateEMGTrace(40, 30, 44, 0, '#3b82f6');
-
-    // PD: ~7 blinks/min = ~1.2 blinks in 10s, much less frequent
     seed = 99;
     generateEMGTrace(40, 25, 130, 100, '#ef4444');
 })();
 
-// ── Generate Epilepsy EMG chart ──
+// ── Generate Epilepsy EMG chart (illustrative) ──
 (function() {
     const svg = document.getElementById('ep-emg-chart');
     if (!svg) return;
@@ -1077,7 +1113,6 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
     const W = 440, H = 200;
 
-    // Background
     const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
     bg.setAttribute('width', W); bg.setAttribute('height', H);
     bg.setAttribute('rx', '8'); bg.setAttribute('fill', '#f8fafc');
@@ -1097,7 +1132,6 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     addText(8, 118, 'Eyelid myoclonia (seizure)', '10', '#ef4444', 'start');
     addText(W - 8, H - 4, '3 seconds', '9', '#94a3b8', 'end');
 
-    // Separator
     const sep = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     sep.setAttribute('x1', 0); sep.setAttribute('x2', W);
     sep.setAttribute('y1', 100); sep.setAttribute('y2', 100);
@@ -1105,7 +1139,6 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     sep.setAttribute('stroke-dasharray', '4,4');
     svg.appendChild(sep);
 
-    // Normal trace: one blink in 3 seconds
     const normalPoints = [];
     const numPts = 400;
     const xStep = W / numPts;
@@ -1114,14 +1147,11 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     for (let i = 0; i < numPts; i++) {
         const x = i * xStep;
         let y = 50 + (rand() - 0.5) * 3;
-
-        // Single blink at ~200
         if (i > 180 && i < 194) {
             const t = (i - 180) / 14;
             y = 50 - Math.sin(t * Math.PI) * 30;
         }
-
-        normalPoints.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+        normalPoints.push(x.toFixed(1) + ',' + y.toFixed(1));
     }
 
     const normalPath = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
@@ -1131,11 +1161,9 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     normalPath.setAttribute('stroke-width', '1.5');
     svg.appendChild(normalPath);
 
-    // Myoclonia trace: rhythmic bursts at ~4Hz
     const myoPoints = [];
     seed = 55;
 
-    // Seizure zone highlight
     const seizureRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
     seizureRect.setAttribute('x', '120'); seizureRect.setAttribute('y', '105');
     seizureRect.setAttribute('width', '260'); seizureRect.setAttribute('height', '85');
@@ -1147,16 +1175,13 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     for (let i = 0; i < numPts; i++) {
         const x = i * xStep;
         let y = 150 + (rand() - 0.5) * 3;
-
-        // Rhythmic myoclonia bursts between i=110 and i=350
         if (i > 110 && i < 350) {
-            const burstFreq = 4; // Hz
-            const timeInBurst = (i - 110) / numPts * 3; // seconds
+            const burstFreq = 4;
+            const timeInBurst = (i - 110) / numPts * 3;
             const amplitude = 28 * Math.min(1, (i - 110) / 30) * Math.min(1, (350 - i) / 30);
             y = 150 - Math.sin(timeInBurst * burstFreq * 2 * Math.PI) * amplitude + (rand() - 0.5) * 4;
         }
-
-        myoPoints.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+        myoPoints.push(x.toFixed(1) + ',' + y.toFixed(1));
     }
 
     const myoPath = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
